@@ -8,8 +8,8 @@ interface PageSelectorProps {
 }
 
 export const PageSelector = (props: PageSelectorProps) => {
-    const [pageCount, setPageCount] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const { isFiltering, filteredPokemonList, currentPage, setCurrentPage } = useContext(StoreContext)
+    const [allPokemonPageCount, setAllPokemonPageCount] = useState<number>(0);
 
     useEffect(() => {
         fetch("https://pokeapi.co/api/v2/pokemon/")
@@ -17,13 +17,25 @@ export const PageSelector = (props: PageSelectorProps) => {
                 return response.json();
             })
             .then((response) => {
-                setPageCount(Math.ceil(response.count / 20));
+                setAllPokemonPageCount(Math.ceil(response.count / 20));
             });
     }, []);
 
     useEffect(() => {
+        if (isFiltering){
+            return
+        }
         props.getPokemonList(20, (currentPage - 1) * 20);
-    }, [currentPage]);
+    }, [currentPage, isFiltering]);
+
+    function getPageCount () {
+        if(!isFiltering){
+            return allPokemonPageCount
+        }
+        return Math.ceil(filteredPokemonList.length / 20)
+    }
+
+    const pageCount = getPageCount()
 
     const array = [];
 
@@ -55,14 +67,13 @@ export const PageSelector = (props: PageSelectorProps) => {
     };
 
     const createArrowUp = (currentPage: number) => {
-        if (currentPage !== 57) {
+        if (currentPage !== pageCount) {
             return (
                 <img
                     className="rightArrow"
                     src={arrow}
                     onClick={() => {
                         setCurrentPage(currentPage + 1);
-                        // props.getPokemonList(20, (currentPage+1)*20);
                     }}
                 />
             );

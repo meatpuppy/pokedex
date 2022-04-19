@@ -9,7 +9,7 @@ import { PokemonCardElements } from "models/PokemonCardElements";
 import { PageSelector } from "components/pageselector";
 
 export const Dashboard = () => {
-    const { pokemon, setPokemon } = useContext(StoreContext);
+    const { filteredPokemonList, setFilteredPokemonList } = useContext(StoreContext);
     const [loading, setLoading] = useState(false);
 
     const getPokemonForm = (limit: number, offset: number) => {
@@ -37,7 +37,7 @@ export const Dashboard = () => {
                     })
                     Promise.all(results)
                     .then((response) => { 
-                        setPokemon(response);
+                        setFilteredPokemonList(response);
                         setLoading(false);
                     })
                 })

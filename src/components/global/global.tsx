@@ -12,7 +12,13 @@ interface StoreValues {
     pokemon: Array<PokemonCardElements>,
     setPokemon: React.Dispatch<React.SetStateAction<PokemonCardElements[]>>,
     details: DetailsElements | null,
-    setDetails: React.Dispatch<React.SetStateAction<DetailsElements | null>>
+    setDetails: React.Dispatch<React.SetStateAction<DetailsElements | null>>,
+    filteredPokemonList: Array<PokemonCardElements>,
+    setFilteredPokemonList: React.Dispatch<React.SetStateAction<PokemonCardElements[]>>,
+    isFiltering: boolean,
+    setIsFiltering: React.Dispatch<React.SetStateAction<boolean>>,
+    currentPage: number,
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
 }
 
 interface ProviderProps {
@@ -28,6 +34,9 @@ export const StoreProvider = (props: ProviderProps) => {
     const [gender, setGender] = useState("")
     const [pokemon, setPokemon] = useState<Array<PokemonCardElements>>([])
     const [details, setDetails] = useState<DetailsElements | null>(null)
+    const [filteredPokemonList, setFilteredPokemonList] = useState<PokemonCardElements[]>([])
+    const [isFiltering, setIsFiltering] = useState(false)
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     return(
         <StoreContext.Provider value={{
@@ -36,6 +45,9 @@ export const StoreProvider = (props: ProviderProps) => {
             gender, setGender,
             pokemon, setPokemon,
             details, setDetails,
+            filteredPokemonList, setFilteredPokemonList,
+            isFiltering, setIsFiltering,
+            currentPage, setCurrentPage,
         }}>{props.children}</StoreContext.Provider>
         
     )
