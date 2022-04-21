@@ -8,6 +8,7 @@ export function PokemonList() {
         useContext(StoreContext);
 
     const showDetails = (url: string) => {
+        window.scrollTo(0,0)
         fetch(url)
             .then((response) => {
                 return response.json();
@@ -25,7 +26,6 @@ export function PokemonList() {
     }
 
     const exhibitionList = getExhibitionList();
-    console.log(exhibitionList)
 
     return (
         <Container>
@@ -33,10 +33,10 @@ export function PokemonList() {
                 return (
                     <PokemonCard key={item.id}>
                         <div className="card">
-                            <img src={ballpng}></img>
+                            <img src={ballpng} alt="This is a pokeball"></img>
                             <p>{item.name.toUpperCase()}</p>
                         </div>
-                        <img src={item.sprites.front_default}></img>
+                        <img src={item.sprites.front_default} alt="this is the Pokemon"></img>
                         <button
                             onClick={() => {
                                 showDetails(item.pokemon.url);
