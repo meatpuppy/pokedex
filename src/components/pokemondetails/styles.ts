@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
     justify-self: center;
@@ -79,14 +79,34 @@ export const MovesDetailsContainer = styled.div`
             display: flex;
             flex-direction: row;
 
-            p{
-                :last-child{
+            p {
+                :last-child {
                     margin-left: 5px;
                 }
             }
         }
     }
 `;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const ImgBallStatic = styled.img`
+height: 2em;
+margin-right: 0.5em;
+`
+
+export const ImgBallAnimated = styled.img`
+
+animation: ${rotate} 0.7s ease infinite;
+height: 2em;
+margin-right: 0.5em;
+`
 
 export const MovesContainer = styled.div`
     overflow-y: auto;
@@ -110,11 +130,6 @@ export const MovesContainer = styled.div`
 
             p {
                 margin-left: 0.5em;
-            }
-
-            img {
-                height: 2em;
-                margin-right: 0.5em;
             }
         }
     }

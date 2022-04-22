@@ -1,4 +1,4 @@
-import { PageSelect } from "./styles";
+import { PageButton, PageSelect } from "./styles";
 import arrow from "../../assets/arrow.png";
 import { StoreContext } from "components/global/global";
 import { useContext, useEffect, useState } from "react";
@@ -39,16 +39,29 @@ export const PageSelector = (props: PageSelectorProps) => {
 
     const array = [];
 
-    for (let x = 0; x < pageCount; x++) {
+    const numberOfElements = 5
+
+    let initialValue = currentPage-Math.floor(numberOfElements/2)
+
+    initialValue = Math.max(initialValue,1)
+
+    const excess = initialValue+numberOfElements-pageCount
+
+    if(excess > 0){
+        initialValue-=excess
+    }
+    
+    for (let x = initialValue; x < initialValue+numberOfElements; x++) {
         array.push(
-            <button
+            <PageButton
+                isSelected={currentPage === x}
                 key={x}
                 onClick={() => {
-                    setCurrentPage(x + 1);
+                    setCurrentPage(x);
                 }}
             >
-                {x + 1}
-            </button>
+                {x}
+            </PageButton>
         );
     }
 
@@ -80,9 +93,28 @@ export const PageSelector = (props: PageSelectorProps) => {
         }
     };
 
+    // const PageSliceDownToZero = () => {
+    //     if (((currentPage-1)-2) <= 0){
+    //         return 0
+    //     } else if (((currentPage-1)-2) >= 3){
+    //         return ((currentPage-1)-2)
+    //     }
+    // }
+
+    // const PageSliceMax = () => {
+    //     if (((currentPage-1)-2) <= 2){
+    //         return 5
+    //     } else if 
+    //     (((currentPage-1)-2) >= 3){
+    //         return ((currentPage-1)+3)
+    //     }
+    // }
+
+
     return (
         <PageSelect>
             {createArrowDown(currentPage)}
+            {/* {array.slice(PageSliceDownToZero(), PageSliceMax())} */}
             {array}
             {createArrowUp(currentPage)}
         </PageSelect>

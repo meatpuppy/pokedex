@@ -1,32 +1,37 @@
 import styled from "styled-components";
 
+interface PageButtonProps {
+    isSelected: boolean,
+}
+
 export const PageSelect = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 350px;
+    justify-content: center;
+    align-items: center;
 
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-max-width: 300px; 
-justify-content: center;
-align-items: center;
+    .leftArrow {
+        height: 1.2em;
+        margin-right: 1em;
+    }
 
-.leftArrow{
-    height: 1.2em;
-    margin-right: 1em;
-}
+    .rightArrow {
+        height: 1.2em;
+        margin-right: 0em;
+        margin-left: 1em;
+        rotate: 180deg;
+    }
+`;
 
-.rightArrow{
-    height: 1.2em;
-    margin-right: 0em;
-    margin-left: 1em;
-    rotate: 180deg;
-}
+export const PageButton = styled.button<PageButtonProps>`
 
-button{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    background-color: #1f1f1f;
+    background-color: ${(props) => { return props.isSelected ? "#33498a" : "#1f1f1f" }};
     color: #FFFFFF;
     font-size: 1em;
     width: 35px;
@@ -37,8 +42,5 @@ button{
 
     :last-of-type{
         margin-right: 0px;
-
     }
-}
-
 `

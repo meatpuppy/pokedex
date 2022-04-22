@@ -11,6 +11,8 @@ import {
     TypeContainer,
     MovesContainer,
     MovesDetailsContainer,
+    ImgBallStatic,
+    ImgBallAnimated,
 } from "./styles";
 
 import bug from "assets/typebug.png";
@@ -49,6 +51,7 @@ interface MoveDetails {
 export const PokemonDetails = () => {
     const { details, setDetails } = useContext(StoreContext);
     const [moveDetails, setMoveDetails] = useState<MoveDetails | null>(null);
+    const [animation, setAnimation] = useState<number>();
 
     const types = {
         bug,
@@ -71,15 +74,19 @@ export const PokemonDetails = () => {
         water,
     };
 
-    async function handleMoveDetails(url: string) {
+    async function handleMoveDetails(url: string, index: number) {
         if (moveDetails !== null) {
-            setMoveDetails(null);
+            setMoveDetails(null)
+            setAnimation(-1)
             return;
         }
         const fetchResult = await fetch(url);
         const resultJson = await fetchResult.json();
         setMoveDetails(resultJson);
+        setAnimation(index)
     }
+
+    console.log(animation)
 
     if (details === null) {
         return null;
@@ -127,20 +134,18 @@ export const PokemonDetails = () => {
                             })}
                         </TypeContainer>
                         <MovesContainer>
-                            {details.moves.map((item) => {
+                            {details.moves.map((item, index) => {
+
                                 return (
                                     <div>
                                         <button
-                                            onClick={() =>
-                                                handleMoveDetails(item.move.url)
-                                            }
-                                        >
+                                            onClick={() => handleMoveDetails(item.move.url, index)}>
                                             <p>
-                                                {item.move.name
-                                                    .toUpperCase()
-                                                    .replace("-", " ")}
+                                                {item.move.name.toUpperCase().replace("-", " ")}
                                             </p>
-                                            <img src={ball} alt="This is a pokeball" />
+                                            {index !== animation && <ImgBallStatic src={ball} />}
+                                            {index === animation && <ImgBallAnimated src={ball} />}
+                                            {/* <img src={ball} alt="This is a pokeball" /> */}
                                         </button>
                                     </div>
                                 );

@@ -36,7 +36,7 @@ export function PokemonList() {
                             <img src={ballpng} alt="This is a pokeball"></img>
                             <p>{item.name.toUpperCase()}</p>
                         </div>
-                        <img src={item.sprites.front_default} alt="this is the Pokemon"></img>
+                        <img src={item.sprites.front_default} alt={item.name}></img>
                         <button
                             onClick={() => {
                                 showDetails(item.pokemon.url);
