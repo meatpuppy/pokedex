@@ -11,6 +11,7 @@ border-radius: 0em 0em 1em 1em;
 max-height: fit-content;
 font-size: 1em;
 width: 99vw;
+margin-bottom: 1em;
 
     div{
         display: flex;

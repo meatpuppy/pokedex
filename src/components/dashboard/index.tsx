@@ -1,4 +1,4 @@
-import { Container, ListContainer } from "./styles";
+import { Container, ImgBallAnimated, ListContainer } from "./styles";
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../global/global";
 import { Header } from "components/header";
@@ -7,6 +7,7 @@ import { PokemonDetails } from "components/pokemondetails";
 import { PokemonListResults } from "models/PokemonListResults";
 import { PokemonCardElements } from "models/PokemonCardElements";
 import { PageSelector } from "components/pageselector";
+import ball from "assets/ball.png";
 
 export const Dashboard = () => {
     const { filteredPokemonList, setFilteredPokemonList } = useContext(StoreContext);
@@ -51,7 +52,8 @@ export const Dashboard = () => {
     return (
         <Container>
             <Header />
-            {loading && <p>LOADING</p>}
+            <PageSelector getPokemonList={getPokemonList} />
+            {loading && <ImgBallAnimated src={ball}/>}
             {!loading && <PokemonDetails />}
             {!loading && (
                 <ListContainer>

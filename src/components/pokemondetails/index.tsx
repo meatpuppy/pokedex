@@ -13,6 +13,7 @@ import {
     MovesDetailsContainer,
     ImgBallStatic,
     ImgBallAnimated,
+    LoadingBallAnimated,
 } from "./styles";
 
 import bug from "assets/typebug.png";
@@ -52,6 +53,7 @@ export const PokemonDetails = () => {
     const { details, setDetails } = useContext(StoreContext);
     const [moveDetails, setMoveDetails] = useState<MoveDetails | null>(null);
     const [animation, setAnimation] = useState<number>();
+    const [loading, setLoading] = useState(false);
 
     const types = {
         bug,
@@ -75,6 +77,7 @@ export const PokemonDetails = () => {
     };
 
     async function handleMoveDetails(url: string, index: number) {
+        setLoading(true);
         if (moveDetails !== null) {
             setMoveDetails(null)
             setAnimation(-1)
@@ -84,9 +87,8 @@ export const PokemonDetails = () => {
         const resultJson = await fetchResult.json();
         setMoveDetails(resultJson);
         setAnimation(index)
+        setLoading(false)
     }
-
-    console.log(animation)
 
     if (details === null) {
         return null;
@@ -145,7 +147,6 @@ export const PokemonDetails = () => {
                                             </p>
                                             {index !== animation && <ImgBallStatic src={ball} />}
                                             {index === animation && <ImgBallAnimated src={ball} />}
-                                            {/* <img src={ball} alt="This is a pokeball" /> */}
                                         </button>
                                     </div>
                                 );

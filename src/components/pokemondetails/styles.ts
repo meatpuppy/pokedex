@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
     justify-self: center;
-    margin-top: 1.5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,7 +64,7 @@ export const MovesDetailsContainer = styled.div`
     background-color: #1f1f1f;
     color: white;
     left: 1200px;
-    top: 450px;
+    top: 555px;
     margin-right: 1em;
     margin-left: 1em;
     width: fit-content;
@@ -101,24 +100,35 @@ height: 2em;
 margin-right: 0.5em;
 `
 
-export const ImgBallAnimated = styled.img`
+export const LoadingBallAnimated = styled.img`
 
 animation: ${rotate} 0.7s ease infinite;
+height: 400px;
+margin-bottom: 1em;
+`
+
+export const ImgBallAnimated = styled.img`
+
+animation: ${rotate} 0.7s linear infinite;
 height: 2em;
 margin-right: 0.5em;
 `
 
 export const MovesContainer = styled.div`
     overflow-y: auto;
+    align-self: flex-end;
     display: flex;
     flex-direction: column;
     height: 314px;
+    width: fit-content;
     padding: 1em;
 
     div {
+
         button {
             color: white;
-            margin: 0.5em;
+            margin-bottom: 1em;
+            margin-right: 1em;
             background-color: #1f1f1f;
             border-radius: 1em;
             display: flex;
@@ -126,7 +136,7 @@ export const MovesContainer = styled.div`
             justify-content: space-between;
             align-items: center;
             border: 0px;
-            width: 200px;
+            width: 240px;
 
             p {
                 margin-left: 0.5em;

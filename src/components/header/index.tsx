@@ -41,7 +41,7 @@ export const Header = () => {
         <Container>
             <p>Welcome {login}, let's start the search!</p>
             <div>
-                <input placeholder="Search for your pokémon" value={ search } onChange={ handleOnChange }></input>
+                <input placeholder="Search for your pokémon" value={ search } onChange={ handleOnChange } ></input>
                 <button onClick={ () => handleSearch(search) }><img src={ grasspng } /></button>
             </div>
         </Container>  

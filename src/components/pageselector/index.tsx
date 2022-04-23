@@ -1,4 +1,4 @@
-import { PageButton, PageSelect } from "./styles";
+import { Container, PageButton, PageSelect, RandomPage } from "./styles";
 import arrow from "../../assets/arrow.png";
 import { StoreContext } from "components/global/global";
 import { useContext, useEffect, useState } from "react";
@@ -8,8 +8,15 @@ interface PageSelectorProps {
 }
 
 export const PageSelector = (props: PageSelectorProps) => {
-    const { isFiltering, filteredPokemonList, currentPage, setCurrentPage } = useContext(StoreContext)
+    const { isFiltering, filteredPokemonList, currentPage, setCurrentPage } =
+        useContext(StoreContext);
     const [allPokemonPageCount, setAllPokemonPageCount] = useState<number>(0);
+
+    function goToRandomPage() {
+        const min = Math.ceil(1);
+        const max = Math.floor(58); 
+        setCurrentPage(Math.floor(Math.random() * (max - min)) + min)
+    }
 
     useEffect(() => {
         fetch("https://pokeapi.co/api/v2/pokemon/")
@@ -22,36 +29,36 @@ export const PageSelector = (props: PageSelectorProps) => {
     }, []);
 
     useEffect(() => {
-        if (isFiltering){
-            return
+        if (isFiltering) {
+            return;
         }
         props.getPokemonList(20, (currentPage - 1) * 20);
     }, [currentPage, isFiltering]);
 
-    function getPageCount () {
-        if(!isFiltering){
-            return allPokemonPageCount
+    function getPageCount() {
+        if (!isFiltering) {
+            return allPokemonPageCount;
         }
-        return Math.ceil(filteredPokemonList.length / 20)
+        return Math.ceil(filteredPokemonList.length / 20);
     }
 
-    const pageCount = getPageCount()
+    const pageCount = getPageCount();
 
     const array = [];
 
-    const numberOfElements = 5
+    const numberOfElements = 5;
 
-    let initialValue = currentPage-Math.floor(numberOfElements/2)
+    let initialValue = currentPage - Math.floor(numberOfElements / 2);
 
-    initialValue = Math.max(initialValue,1)
+    initialValue = Math.max(initialValue, 1);
 
-    const excess = initialValue+numberOfElements-pageCount
+    const excess = initialValue + numberOfElements - pageCount;
 
-    if(excess > 0){
-        initialValue-=excess
+    if (excess > 0) {
+        initialValue -= excess;
     }
-    
-    for (let x = initialValue; x < initialValue+numberOfElements; x++) {
+
+    for (let x = initialValue; x < initialValue + numberOfElements; x++) {
         array.push(
             <PageButton
                 isSelected={currentPage === x}
@@ -93,30 +100,14 @@ export const PageSelector = (props: PageSelectorProps) => {
         }
     };
 
-    // const PageSliceDownToZero = () => {
-    //     if (((currentPage-1)-2) <= 0){
-    //         return 0
-    //     } else if (((currentPage-1)-2) >= 3){
-    //         return ((currentPage-1)-2)
-    //     }
-    // }
-
-    // const PageSliceMax = () => {
-    //     if (((currentPage-1)-2) <= 2){
-    //         return 5
-    //     } else if 
-    //     (((currentPage-1)-2) >= 3){
-    //         return ((currentPage-1)+3)
-    //     }
-    // }
-
-
     return (
-        <PageSelect>
-            {createArrowDown(currentPage)}
-            {/* {array.slice(PageSliceDownToZero(), PageSliceMax())} */}
-            {array}
-            {createArrowUp(currentPage)}
-        </PageSelect>
+        <Container>
+            <RandomPage onClick={() => goToRandomPage()}>Random page</RandomPage>
+            <PageSelect>
+                {createArrowDown(currentPage)}
+                {array}
+                {createArrowUp(currentPage)}
+            </PageSelect>
+        </Container>
     );
 };
