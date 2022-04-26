@@ -1,4 +1,4 @@
-import { Container, PageButton, PageSelect, RandomPage } from "./styles";
+import { Container, PageButton, PageSelect, RandomPage, RowContainer, GoToPageInput } from "./styles";
 import arrow from "../../assets/arrow.png";
 import { StoreContext } from "components/global/global";
 import { useContext, useEffect, useState } from "react";
@@ -8,9 +8,9 @@ interface PageSelectorProps {
 }
 
 export const PageSelector = (props: PageSelectorProps) => {
-    const { isFiltering, filteredPokemonList, currentPage, setCurrentPage } =
-        useContext(StoreContext);
+    const { isFiltering, filteredPokemonList, currentPage, setCurrentPage } = useContext(StoreContext);
     const [allPokemonPageCount, setAllPokemonPageCount] = useState<number>(0);
+    const [goToPageInput, setGoToPageInput] = useState<string>("");
 
     function goToRandomPage() {
         const min = Math.ceil(1);
@@ -100,14 +100,35 @@ export const PageSelector = (props: PageSelectorProps) => {
         }
     };
 
+    const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newPage = event.target.value
+        setGoToPageInput(newPage)
+    }
+
+    const goToPage = (page: string) => {
+        setCurrentPage(parseInt(page))
+    }
+
     return (
         <Container>
-            <RandomPage onClick={() => goToRandomPage()}>Random page</RandomPage>
+            
             <PageSelect>
                 {createArrowDown(currentPage)}
                 {array}
                 {createArrowUp(currentPage)}
             </PageSelect>
+            <RowContainer>
+                <RandomPage onClick={() => goToRandomPage()}>Random page</RandomPage>
+                <GoToPageInput
+                    type="number"
+                    max={57} min={1}
+                    value={goToPageInput}
+                    placeholder="Go to page..."
+                    onChange={handlePageChange}
+                    onKeyPress={(e) => e.key === "Enter" && goToPage(goToPageInput)}
+                />
+            </RowContainer>
+            
         </Container>
     );
 };

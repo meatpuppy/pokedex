@@ -1,17 +1,14 @@
 import { Container, ImgBallAnimated, ListContainer } from "./styles";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { StoreContext } from "../global/global";
 import { Header } from "components/header";
 import { PokemonList } from "components/pokemonlist";
 import { PokemonDetails } from "components/pokemondetails";
-import { PokemonListResults } from "models/PokemonListResults";
-import { PokemonCardElements } from "models/PokemonCardElements";
 import { PageSelector } from "components/pageselector";
 import ball from "assets/ball.png";
 
 export const Dashboard = () => {
-    const { filteredPokemonList, setFilteredPokemonList } = useContext(StoreContext);
-    const [loading, setLoading] = useState(false);
+    const { loading, setLoading, setFilteredPokemonList } = useContext(StoreContext);
 
     const getPokemonForm = (limit: number, offset: number) => {
         return fetch(

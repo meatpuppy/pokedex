@@ -23,8 +23,8 @@ export const RandomPage = styled.button`
     font-size: 1em;
     width: fit-content;
     padding: 1em;
-    margin-bottom: 1em;
     border-radius: 1em;
+    margin-right: 1em;
 
 `;
 
@@ -70,3 +70,21 @@ export const PageButton = styled.button<PageButtonProps>`
         margin-right: 0px;
     }
 `;
+
+export const RowContainer = styled.div`
+
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
+`
+
+export const GoToPageInput = styled.input`
+display: flex;
+background-color: #1f1f1f;
+padding:1em;
+border-radius: 1em;
+border:0px;
+color: white;
+font-size: 1em;
+`

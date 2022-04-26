@@ -1,14 +1,11 @@
 import { Container } from "./styles";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { StoreContext } from "../global/global";
 import grasspng from "../../assets/grass.png"
-import { PokemonList } from "../pokemonlist";
-import { PokemonCardElements } from "models/PokemonCardElements";
-import { json } from "stream/consumers";
 import { PokemonListResults } from "models/PokemonListResults";
 
 export const Header = () => {
-    const { login, search, setSearch, setFilteredPokemonList, setIsFiltering, setCurrentPage } = useContext(StoreContext);
+    const { search, setSearch, setFilteredPokemonList, setIsFiltering, setCurrentPage, setLoading } = useContext(StoreContext);
     
     function handleOnChange (event: React.ChangeEvent<HTMLInputElement>) {
         setSearch(event.target.value.toLowerCase())
@@ -21,6 +18,7 @@ export const Header = () => {
     };
 
     async function handleSearch (search: string) {
+        setLoading(true)
         if(search === ""){
             console.error("campo de busca esta vazio")
             return
@@ -35,14 +33,16 @@ export const Header = () => {
         setFilteredPokemonList(pokemonFormsJson)
         setIsFiltering(true)
         setCurrentPage(1)
+        setLoading(false)
     }
 
     return(
         <Container>
-            <p>Welcome {login}, let's start the search!</p>
+            <p>Welcome, let's start the search!</p>
             <div>
-                <input placeholder="Search for your pokémon" value={ search } onChange={ handleOnChange } ></input>
-                <button onClick={ () => handleSearch(search) }><img src={ grasspng } /></button>
+                <input placeholder="Search for your pokémon" value={ search } onChange={ handleOnChange }
+                onKeyPress={(e) => e.key === "Enter" && handleSearch(search)}></input>
+                <button onClick={ () => handleSearch(search) }><img src={ grasspng } alt="Search" /></button>
             </div>
         </Container>  
     )

@@ -12,6 +12,7 @@ max-height: fit-content;
 font-size: 1em;
 width: 99vw;
 margin-bottom: 1em;
+flex-wrap: wrap;
 
     div{
         display: flex;
