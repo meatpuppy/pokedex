@@ -14,6 +14,9 @@ import {
     ImgBallStatic,
     ImgBallAnimated,
     LoadingBallAnimated,
+    MoveName,
+    MoveButton,
+    Sprite,
 } from "./styles";
 
 import bug from "assets/typebug.png";
@@ -94,7 +97,7 @@ export const PokemonDetails = () => {
         return null;
     }
     return (
-        <>
+        <RowContainer>
             <Container>
                 <RowSpaceBetween>
                     <p>{details.name.toUpperCase()}</p>
@@ -109,12 +112,12 @@ export const PokemonDetails = () => {
                 </RowSpaceBetween>
 
                 <SpritesContainer>
-                    <img
+                    <Sprite
                         className="sprite"
                         src={details.sprites.front_default}
                         alt="This is the normal version"
                     />
-                    <img className="sprite" src={details.sprites.front_shiny} alt="This is the shiny version" />
+                    <Sprite src={details.sprites.front_shiny} alt="This is the shiny version" />
                 </SpritesContainer>
                 <RowContainer>
                     <ColumnContainer>
@@ -139,16 +142,16 @@ export const PokemonDetails = () => {
                             {details.moves.map((item, index) => {
 
                                 return (
-                                    <div>
-                                        <button
+                                    
+                                        <MoveButton
                                             onClick={() => handleMoveDetails(item.move.url, index)}>
-                                            <p>
+                                            <MoveName>
                                                 {item.move.name.toUpperCase().replace("-", " ")}
-                                            </p>
+                                            </MoveName>
                                             {index !== animation && <ImgBallStatic src={ball} />}
                                             {index === animation && <ImgBallAnimated src={ball} />}
-                                        </button>
-                                    </div>
+                                        </MoveButton>
+                                    
                                 );
                             })}
                         </MovesContainer>
@@ -195,6 +198,6 @@ export const PokemonDetails = () => {
                     </div>
                 )}
             </MovesDetailsContainer>
-        </>
+        </RowContainer>
     );
 };

@@ -1,4 +1,4 @@
-import { Container, PokemonCard } from "./styles";
+import { Container, PokemonCard, PokemonTitle, PokeBallImg, Card } from "./styles";
 import { useContext } from "react";
 import { StoreContext } from "../global/global";
 import ballpng from "../../assets/ball.png";
@@ -32,10 +32,10 @@ export function PokemonList() {
             {exhibitionList.map((item) => {
                 return (
                     <PokemonCard key={item.id}>
-                        <div className="card">
-                            <img src={ballpng} alt="This is a pokeball"></img>
-                            <p>{item.name.toUpperCase()}</p>
-                        </div>
+                        <Card>
+                            <PokeBallImg src={ballpng} alt="This is a pokeball" />
+                            <PokemonTitle>{item.name.toUpperCase()}</PokemonTitle>
+                        </Card>
                         <img src={item.sprites.front_default} alt={item.name}></img>
                         <button
                             onClick={() => {

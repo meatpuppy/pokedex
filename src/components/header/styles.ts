@@ -31,6 +31,7 @@ flex-wrap: wrap;
         button{
             background-color: transparent;
             border: 0px;
+            cursor: pointer;
 
             img{
                 max-height: 3em;

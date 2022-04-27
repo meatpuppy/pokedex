@@ -1,4 +1,4 @@
-import { Container, PageButton, PageSelect, RandomPage, RowContainer, GoToPageInput } from "./styles";
+import { Container, PageButton, PageSelect, RandomPage, RowContainer, GoToPageInput, RightArrow, LeftArrow } from "./styles";
 import arrow from "../../assets/arrow.png";
 import { StoreContext } from "components/global/global";
 import { useContext, useEffect, useState } from "react";
@@ -75,7 +75,7 @@ export const PageSelector = (props: PageSelectorProps) => {
     const createArrowDown = (currentPage: number) => {
         if (currentPage !== 1) {
             return (
-                <img
+                <LeftArrow
                     className="leftArrow"
                     src={arrow}
                     onClick={() => {
@@ -89,7 +89,7 @@ export const PageSelector = (props: PageSelectorProps) => {
     const createArrowUp = (currentPage: number) => {
         if (currentPage !== pageCount) {
             return (
-                <img
+                <RightArrow
                     className="rightArrow"
                     src={arrow}
                     onClick={() => {
@@ -121,11 +121,12 @@ export const PageSelector = (props: PageSelectorProps) => {
                 <RandomPage onClick={() => goToRandomPage()}>Random page</RandomPage>
                 <GoToPageInput
                     type="number"
-                    max={57} min={1}
+                    max="57" min="1"
                     value={goToPageInput}
                     placeholder="Go to page..."
                     onChange={handlePageChange}
-                    onKeyPress={(e) => e.key === "Enter" && goToPage(goToPageInput)}
+                    onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                        e.key === "Enter" && goToPage(goToPageInput)}
                 />
             </RowContainer>
             

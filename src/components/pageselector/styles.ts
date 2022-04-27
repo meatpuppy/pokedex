@@ -12,7 +12,6 @@ export const Container = styled.div`
 `;
 
 export const RandomPage = styled.button`
-
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -25,7 +24,7 @@ export const RandomPage = styled.button`
     padding: 1em;
     border-radius: 1em;
     margin-right: 1em;
-
+    cursor: pointer;
 `;
 
 export const PageSelect = styled.div`
@@ -36,18 +35,20 @@ export const PageSelect = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 1em;
+`;
 
-    .leftArrow {
-        height: 1.2em;
-        margin-right: 1em;
-    }
+export const LeftArrow = styled.img`
+    height: 1.2em;
+    margin-right: 1em;
+    cursor: pointer;
+`;
 
-    .rightArrow {
-        height: 1.2em;
-        margin-right: 0em;
-        margin-left: 1em;
-        rotate: 180deg;
-    }
+export const RightArrow = styled.img`
+    height: 1.2em;
+    margin-right: 0em;
+    margin-left: 1em;
+    rotate: 180deg;
+    cursor: pointer;
 `;
 
 export const PageButton = styled.button<PageButtonProps>`
@@ -65,6 +66,7 @@ export const PageButton = styled.button<PageButtonProps>`
     border-radius: 13px;
     margin-right: 1em;
     border: 0px;
+    cursor: pointer;
 
     :last-of-type {
         margin-right: 0px;
@@ -72,19 +74,17 @@ export const PageButton = styled.button<PageButtonProps>`
 `;
 
 export const RowContainer = styled.div`
-
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-
-`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+`;
 
 export const GoToPageInput = styled.input`
-display: flex;
-background-color: #1f1f1f;
-padding:1em;
-border-radius: 1em;
-border:0px;
-color: white;
-font-size: 1em;
-`
+    display: flex;
+    background-color: #1f1f1f;
+    padding: 1em;
+    border-radius: 1em;
+    border: 0px;
+    color: white;
+    font-size: 1em;
+`;

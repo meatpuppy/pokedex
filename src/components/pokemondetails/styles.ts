@@ -11,6 +11,8 @@ export const Container = styled.div`
     background-color: #33498a;
     border-radius: 16px;
     padding: 1em;
+    z-index: 2;
+    margin-top: 1em;
 `;
 
 export const SpritesContainer = styled.div`
@@ -18,11 +20,11 @@ export const SpritesContainer = styled.div`
     flex-direction: row;
     font-size: 0.7em;
     justify-content: space-between;
-
-    .sprite {
-        height: 20em;
-    }
 `;
+
+export const Sprite = styled.img`
+    height: 20em;
+`
 
 export const StatContainer = styled.div`
     display: flex;
@@ -56,17 +58,58 @@ export const TypeContainer = styled.div`
     }
 `;
 
-export const MovesDetailsContainer = styled.div`
-    z-index: 2;
+const travel = keyframes`
+from {
+    transform: translateX(0);
+}
+
+to {
+    transform: translateX(450px);
+}
+`
+
+export const MovesDetailsAnimated = styled.div`
+    z-index: 1;
+    animation: ${travel} 0.7s ease-out infinite;
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: relative;
     background-color: #1f1f1f;
     color: white;
-    left: 1200px;
-    top: 555px;
     margin-right: 1em;
     margin-left: 1em;
+    top: 336px;
+    left: -450px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    div {
+        div {
+            display: flex;
+            flex-direction: row;
+
+            p {
+                :last-child {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+`;
+
+export const MovesDetailsContainer = styled.div`
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #1f1f1f;
+    color: white;
+    margin-right: 1em;
+    margin-left: 1em;
+    top: 336px;
     width: fit-content;
     height: fit-content;
     border-radius: 1em;
@@ -96,23 +139,21 @@ const rotate = keyframes`
 `;
 
 export const ImgBallStatic = styled.img`
-height: 2em;
-margin-right: 0.5em;
-`
+    height: 2em;
+    margin-right: 0.5em;
+`;
 
 export const LoadingBallAnimated = styled.img`
-
-animation: ${rotate} 0.7s ease infinite;
-height: 400px;
-margin-bottom: 1em;
-`
+    animation: ${rotate} 0.7s ease infinite;
+    height: 400px;
+    margin-bottom: 1em;
+`;
 
 export const ImgBallAnimated = styled.img`
-
-animation: ${rotate} 0.7s linear infinite;
-height: 2em;
-margin-right: 0.5em;
-`
+    animation: ${rotate} 0.7s linear infinite;
+    height: 2em;
+    margin-right: 0.5em;
+`;
 
 export const MovesContainer = styled.div`
     overflow-y: auto;
@@ -122,27 +163,25 @@ export const MovesContainer = styled.div`
     height: 314px;
     width: fit-content;
     padding: 1em;
+`;
 
-    div {
+export const MoveName = styled.p`
+    margin-left: 0.5em;
+`;
 
-        button {
-            color: white;
-            margin-bottom: 1em;
-            margin-right: 1em;
-            background-color: #1f1f1f;
-            border-radius: 1em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            border: 0px;
-            width: 240px;
-
-            p {
-                margin-left: 0.5em;
-            }
-        }
-    }
+export const MoveButton = styled.button`
+    color: white;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    background-color: #1f1f1f;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 0px;
+    width: 240px;
+    cursor: pointer;
 `;
 
 export const RowSpaceBetween = styled.div`

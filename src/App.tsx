@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <StoreProvider>
         <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/pokedex" element={<Dashboard />}></Route>
         </Routes>
       </StoreProvider>
     </BrowserRouter>
