@@ -19,7 +19,7 @@ export const PageSelector = (props: PageSelectorProps) => {
     }
 
     useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon/")
+        fetch("https://pokeapi.co/api/v2/pokemon-form/")
             .then((response) => {
                 return response.json();
             })
@@ -46,17 +46,24 @@ export const PageSelector = (props: PageSelectorProps) => {
 
     const array = [];
 
-    const numberOfElements = 5;
+    let numberOfElements = 5;
 
     let initialValue = currentPage - Math.floor(numberOfElements / 2);
 
     initialValue = Math.max(initialValue, 1);
 
-    const excess = initialValue + numberOfElements - pageCount;
+    const excess = initialValue + numberOfElements - pageCount - 1;
 
     if (excess > 0) {
         initialValue -= excess;
+        if(initialValue < 0){
+            numberOfElements += initialValue
+            initialValue=1
+
+        }
     }
+
+    console.log(pageCount)
 
     for (let x = initialValue; x < initialValue + numberOfElements; x++) {
         array.push(
@@ -101,8 +108,7 @@ export const PageSelector = (props: PageSelectorProps) => {
     };
 
     const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newPage = event.target.value
-        setGoToPageInput(newPage)
+        setGoToPageInput((v) => (event.target.validity.valid ? event.target.value : v))
     }
 
     const goToPage = (page: string) => {
@@ -120,8 +126,9 @@ export const PageSelector = (props: PageSelectorProps) => {
             <RowContainer>
                 <RandomPage onClick={() => goToRandomPage()}>Random page</RandomPage>
                 <GoToPageInput
-                    type="number"
-                    max="57" min="1"
+                    type="text"
+                    pattern="[0-9]*"
+                    max={pageCount} min="1"
                     value={goToPageInput}
                     placeholder="Go to page..."
                     onChange={handlePageChange}

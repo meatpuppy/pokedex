@@ -17,13 +17,14 @@ export const Header = () => {
         );
     };
 
+
     async function handleSearch (search: string) {
         setLoading(true)
         if(search === ""){
             console.error("campo de busca esta vazio")
             return
         }
-        const jsonResponse = await getPokemonForm(1126, 0);
+        const jsonResponse = await getPokemonForm(1295, 0);
         const { results }: {results: Array<PokemonListResults> } = await jsonResponse.json();
         const filteredByName = results.filter((item) => { return item.name.includes(search) });
         const filteredPokemonForms = await Promise.all(filteredByName.map((item) => {
